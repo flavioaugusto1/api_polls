@@ -46,7 +46,10 @@ export async function voteOnPoll(request: FastifyRequest, reply: FastifyReply) {
                 userPreviousVotePoll.pollOptionId,
             )
 
-            voting.publish(pollId, { pollOptionId, votes: Number(votes) })
+            voting.publish(pollId, {
+                pollOptionId: userPreviousVotePoll.pollOptionId,
+                votes: Number(votes),
+            })
         } else if (userPreviousVotePoll) {
             return reply
                 .status(400)
